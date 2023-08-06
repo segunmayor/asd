@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form pt-5 pb-5">
+    <div class="container user-reg-container">
+        <div class="row">
+            <div class="col">
+                <form class="form_el" method="POST" action="{% url 'assessment' %}">{% csrf_token %}
+                  <div id="user-reg-direct-form-container">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col bold">
+                          <h3> Enter your details</h3>
+                        </div>
+                      </div>
+                        <div class="row form-row">
+                            <div class="col form-group">
+                                <input type="text" class="form-control" placeholder="First name" name="first_name" required>
+                              </div>
+                              <div class="col form-group">
+                                <input type="text" class="form-control" placeholder="Middle name" name="middle_name">
+                              </div>
+                        </div>
+                        <div class="row form-row">
+                            <div class="col form-group">
+                                <input type="text" class="form-control" placeholder="Last name" name="last_name" required>
+                              </div>
+                              <div class="col form-group">
+                                <input type="email" class="form-control" placeholder="Email" name="email" required>
+                              </div>
+                        </div>
+                        <div class="row form-row">
+                            <div class="col form-group">
+                                <input type="date" class="form-control" placeholder="Date of Birth" name="dob">
+                              </div>
+                              <div class="col form-group">
+                                <input type="number" class="form-control" placeholder="Phone" name="phone" required>
+                              </div>
+                        </div>
+                        <div class="row form-row">
+                            <div class="col form-group">
+                                <input type="text" class="form-control" placeholder="Address" name="address">
+                              </div>
+                              <div class="col form-group">
+                                <input type="text" class="form-control" placeholder="City" name="city" required>
+                              </div>
+                        </div>
+                        <div class="row form-row">
+                            <div class="col form-group">
+                                <input type="text" class="form-control" placeholder="Zip" name="zip" required>
+                              </div>
+                              <div class="col form-group">
+                                <input type="text" class="form-control" placeholder="State" name="state" required>
+                              </div>
+                        </div>
+                        <div class="row form-row">
+                            <div class="col form-group">
+                                <input type="text" class="form-control" placeholder="Country" name="country" required>
+                                <!-- <select class="form-select" aria-label="Default country">
+                                  <option selected>Select country</option>
+                                </select> -->
+                              </div>
+                              <div class="col form-group">
+                                <input type="text" class="form-control" placeholder="Relationship with Patient" name="rwp" required>
+                              </div>
+                        </div>
+                    </div>
+                  </div>
+                    <!-- patient info  -->
+                    <div id="patient-reg-direct-form-container" style="display: none">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col bold">
+                            <h3> Enter patient details</h3>
+                          </div>
+                        </div>
+                          <div class="row form-row">
+                              <div class="col form-group">
+                                  <input type="text" class="form-control" placeholder="First name" name="patient_first_name" required>
+                                </div>
+                                <div class="col form-group">
+                                  <input type="text" class="form-control" placeholder="Last name" name="patient_last_name" required>
+                                </div>
+                          </div>
+                          <div class="row form-row">
+                              <div class="col form-group">
+                                  <input type="text" class="form-control" placeholder="Middle name" name="patient_middle_name">
+                                </div>
+                                <div class="col form-group">
+                                    <input type="date" class="form-control" placeholder="Date of Birth" name="patient_dob" required>
+                                  </div>
+                          </div>
+                          <div class="row form-row">
+                                <div class="col form-group">
+                                  <input type="number" class="form-control" placeholder="Phone" name="patient_phone">
+                                </div>
+                                <div class="col form-group">
+                                    <input type="text" class="form-control" placeholder="Address" name="patient_address">
+                                  </div>
+                          </div>
+                          <div class="row form-row">
+                                <div class="col form-group">
+                                  <input type="text" class="form-control" placeholder="City" name="patient_city">
+                                </div>
+                                <div class="col form-group">
+                                    <input type="text" class="form-control" placeholder="Zip" name="patient_zip">
+                                  </div>
+                          </div>
+                          <div class="row form-row">
+                                <div class="col form-group">
+                                  <input type="text" class="form-control" placeholder="State" name="patient_state">
+                                </div>
+                                <div class="col form-group">
+                                    <input type="text" class="form-control" placeholder="Country" name="patient_country">
+                                  </div>
+                          </div>
+                      </div>
+                    </div>
+                    <!-- action step buttons -->
+                    <div class="actions-container">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col back text-left"> <a href="#"> < back </a> </div>
+                          <div class="col next register-next text-right"> <a href="#"> next > </a> </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- submit -->
+                    <div class="register-container pt-5">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col register text-right"> <button type="submit" class="register-btn btn btn-primary"> Start Accessment </button> </div>
+                        </div>
+                      </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+const user_form = document.getElementById('user-reg-direct-form-container')
+
+const patient_form = document.getElementById('patient-reg-direct-form-container')
+
+let active_form = true
+
+const backbutton = document.querySelector('.back a')
+const nextbutton = document.querySelector('.next a')
+
+const selected_form_details = [user_form]
+const next_form_details = [patient_form]
+
+function loadform () {
+  if(  active_form === true ){
+
+backbutton.setAttribute('style', 'pointer-events: none; color: #d3d3d3; cursor: not-allowed')
+
+nextbutton.addEventListener('click', next)
+
+
+} else  {
+
+backbutton.setAttribute('style', 'pointer-events: auto; color: #007bff; cursor: defualt')
+
+nextbutton.setAttribute('style', 'pointer-events: none; color: #d3d3d3; cursor: not-allowed')
+
+backbutton.addEventListener('click', back)
+
+}
+}
+
+setInterval(() => loadform (),2000)
+
+ function next (e) {
+  // e.preventDefault()
+
+  const selected = selected_form_details[0]
+  const next = next_form_details[0]
+
+    console.log('form d', selected, next)
+
+  if( selected ){
+
+    selected.style.display = 'none'
+
+    next.style.display = 'block'
+
+    backbutton.setAttribute('style', 'pointer-events: auto; color: #007bff; cursor: defualt')
+
+
+   nextbutton.setAttribute('style', 'pointer-events: none; color: #d3d3d3; cursor: not-allowed')
+
+   active_form = false
+
+   document.querySelector('.register-container').style.display = 'block'
+  }
+
+  console.log('active_form', active_form)
+
+}
+
+function back (e) {
+  e.preventDefault()
+
+  const selected = selected_form_details[0]
+  const next = next_form_details[0]
+
+    console.log('form d b', selected, next)
+
+  if( next ){
+
+    next.style.display = 'none'
+
+    selected.style.display = 'block'
+
+    nextbutton.setAttribute('style', 'pointer-events: auto; color: #007bff; cursor: defualt')
+
+
+   backbutton.setAttribute('style', 'pointer-events: none; color: #d3d3d3; cursor: not-allowed')
+
+   document.querySelector('.register-container').style.display = 'none'
+
+  }
+
+  active_form = true
+  console.log('active_form', active_form)
+
+}
+
+const submitbutton = document.querySelector('.register-btn')
+
+submitbutton.addEventListener('click', submit)
+
+function submit (e) {
+
+  // e.preventDefault()
+
+  const form = document.getElementsByClassName('form_el')[0]
+
+  const formData = new FormData(form, submitbutton)
+
+  const data = []
+
+  for(const [key, val] of formData) {
+
+//     const input = {
+//       key: val
+//     }
+    
+// data.push(input)
+
+formData.set(key, val)
+
+  }
+  
+// console.log('formData', formData)
+
+}
+
+</script>
+
+{% endblock %}

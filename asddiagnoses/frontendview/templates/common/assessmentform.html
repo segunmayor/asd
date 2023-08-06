@@ -1,0 +1,502 @@
+<div class="form pt-5 pb-5">
+    <div class="container form-inner-container">
+        <div class="row">
+            <div class="col p-5">
+                <form action="{% url 'assessment/submit' %}" method="POST" class="text-center">{% csrf_token %}
+                   <div class="container">
+                    <div class="row">
+                        <div class="col form-direct-wrapper">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input name="data" type="text" class="hidden-field hidden-field-data" />
+                            <input name="guardianemail" type="text" class="hidden-field hidden-field-email" />
+                            <input name="patientoutput" type="text" class="hidden-field hidden-field-patientoutput" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col p-5 text-start" style="text-align: left;">
+                            <a href="#" class="back">  </a>
+                        </div>
+                        <div class="col p-5 text-right assessment-submit-button">
+                            <p class="button-custom order-lg-last mb-0">
+                                <span id="pre-submit-assessment-button" class="btn pre-submit-assessment-button btn-secondary py-2 px-3">Submit Now</span>
+                                <button type="submit" id="submit-assessment-button" class="btn submit-assessment-button btn-secondary py-2 px-3" style="display: none">Submit Now</button>
+                            </p>
+                        </div>
+                    </div>
+                   </div>
+                </form>
+            </div>
+        </div>
+        </div>
+      <!-- should be here  {{ datas }} -->
+
+</div>
+
+<script type="text/javascript">
+
+    const currentTime = new Date().getTime()
+
+const current_question = []
+const answers = []
+
+const new_empty_err = []
+
+let choice_state = null
+
+const data_ready_to_be_saved = []
+
+let last_question_answered = false
+
+let new_empty_err_length = 0
+
+const form_wrapper = document.querySelector('.form-direct-wrapper')
+
+const questions = JSON.stringify(`{{ datas|safe }}`)
+
+    const guardianemail = decode("{{ guardianemail }}")
+
+    const patientoutput = decode("{{ patientoutput }}")
+
+setTimeout(() => {
+
+    // console.log('patientoutput', guardianemail, patientoutput)
+
+    // const decode_entity = decode(questions)
+
+    // const remove_unnessary_html_entity = questions.slice(6, -6)
+
+    // const enclose_quotes = '"' + remove_unnessary_html_entity + '"'
+
+    // const remove_open_bracket = "questions.split('[')"
+    // const remove_closed_bracket = "remove_open_bracket[1].split(']')"
+
+    // const new_arr = "remove_closed_bracket[0]"
+
+    // const new_arr_of_obj = new_arr.split()
+
+    // const encod_new_arr = '"' + new_arr_of_obj[0] + '"'
+
+    // const new_arr_of_obj = 'new_arr.split("null},")'
+
+    // console.log('questions', questions)
+
+    const decrypt_data = JSON.parse(JSON.parse(questions))
+
+    console.log('decrypt_data', typeof decrypt_data, decrypt_data)
+
+    for(let i in decrypt_data){
+        // const str = "null},"
+        // const v = decrypt_data[i] + str
+        // const remove_preced_quotes = v.slice(0, -1)
+        
+        // const remove_closed_curly = JSON.stringify(remove_preced_quotes)
+
+        
+
+        // let decode_html_entities = decode(decrypt_data)
+
+        // let decode_html_entities_slice
+
+        
+
+
+       
+
+        // if (Number(i) === ( Number(new_arr_of_obj.length ) - 1) ){
+        //     console.log('innn_222', typeof i, typeof new_arr_of_obj.length - 1, decode_html_entities)
+        //     const decode_html_entities_slice = decode_html_entities.slice(0,-5)
+        // }
+
+        // console.log('innn_222', typeof i, typeof new_arr_of_obj.length - 1, 'decode_html_entities', decode_html_entities, 'decode_html_entities_slice', decode_html_entities_slice)
+
+        // const new_obj = JSON.parse(decode_html_entities)
+
+        new_empty_err.push(decrypt_data[i])
+
+        // console.log('remove_preced_quotes', new_arr_of_obj.length - 1, typeof new_arr_of_obj.toString(), i, typeof i, new_obj)
+    }
+
+    // const new_obj = new_empty_err
+    // const new_obj = new_empty_err.filter((val, key, self) =>  key === (self.length - 1) ? val.slice(0, -5) : val )
+
+    console.log('new_empty_err', new_empty_err)
+
+    new_empty_err.map(assessment)
+
+
+}, 300)
+
+function assessment (val, key, arr) {
+// const assessment_btn = document.querySelectorAll('.assessment-btn')
+
+let form_contents = null
+
+    if(form_wrapper.childElementCount < 1)
+      if(key === 0)
+        console.log('the index', typeof key, val)
+
+        /**
+         * 
+         * the function formContents return a promise
+         *
+         */
+
+        // set the next question
+        const default_length = 1
+        const first_question = nextItem(arr, default_length, current_question)
+
+        // sessionStorage.setItem('previous_index', key)
+
+        updateFormQuestion(form_wrapper, first_question)
+
+        // form_contents = formContents(arr[0])
+        //   form_contents.then(res => {
+
+        //     current_question.push(res)
+        //     // console.log('current_question', res, current_question)
+        //     updateFormQuestion(form, current_question)
+        //     // form.innerHTML = current_question[current_question.length -1]
+
+        // })
+    
+        
+        let this_item, next_item
+
+    // get the available option button
+     setTimeout(() => {
+       
+        const optionButtonInterval = setInterval(() => {
+
+            const buttons = document.querySelectorAll('.assessment-btn')
+        
+        buttons.forEach((button, index, self) => {
+        if( button.classList.contains(`assessment-sd-option-${val.sn}`) || button.classList.contains(`assessment-d-option-${val.sn}`) || button.classList.contains(`assessment-sa-option-${val.sn}`) || button.classList.contains(`assessment-a-option-${val.sn}`) ) {
+
+            let button_state = true
+            
+            button.addEventListener('click', (e) => {
+
+                e.preventDefault()
+
+                const new_arr_length = Number(arr.length)
+                const current_question_length = Number(current_question.length)
+
+                if( val.answer != null ){
+
+                    e.target.style.background = '#2f89fc'
+
+                    button_state = choice_state = true
+
+                }else {
+
+                    const assessment_wrapper = document.querySelector('.assessment-wrapper')
+
+                    if((assessment_wrapper.style.display).toString() !== 'block')
+                    {
+                        
+const button_value = e.target.innerHTML
+
+// check for the right item that contains the button value and return the item
+
+this_item = arr.find( item => item.sn == val.sn )
+
+this_item.answer = button_value
+
+// if (current_question_length <= new_arr_length){
+    if(this_item.answer == button_value)
+      answers.push(this_item)
+      next_item = val.sn + 1
+      e.target.style.backgroundColor = '#ff8000'
+      
+      // set the next question
+      const next_question = nextItem(arr, next_item, current_question)
+
+    //   sessionStorage.setItem('previous_index', val.sn)
+
+      updateFormQuestion(form_wrapper, next_question)
+        
+      console.log('button', e, 'button_value', button_value, 'this_item', this_item, 'this_item_answer', typeof this_item.answer, 'answers', answers, 'next_item', next_item, 'current_question', current_question, 'next', next_question, 'new_arr_length', new_arr_length, current_question_length)
+
+      button_state = choice_state = false
+
+                    // }else{
+                    //     alert('Ooops! You have completed the assessment, kindly submit to proceed')
+                    // }
+
+                    }else {
+
+                       
+                        e.target.disabled = true
+
+                    }
+
+                        
+if(last_question_answered !== false){
+    const submit_button = document.querySelector('.assessment-submit-button')
+        
+        submit_button.style.display = 'block'
+        submit_button.style.textAlign = 'right'
+
+        checkAssessmentStage(new_empty_err, current_question, new_empty_err_length)
+
+        // clear intervals
+
+setTimeout(() => myClearInterval(setAssessmentCheckInterval), 300)
+
+}
+              
+                }
+
+
+        })
+
+        }
+    })
+
+        }, 700)
+
+    }, 1200)
+    
+    // console.log('form_contents', form_contents, 'answers', answers)
+
+// console.log('form', form, form.childElementCount, 'key', key, 'value', val, 'form_contents', form_contents)
+    }
+
+function decode(str) {
+
+let txt = document.createElement("textarea");
+
+txt.innerHTML = str;
+
+return txt.value;
+
+}
+
+async function formContents (obj) {
+
+    if( obj !== undefined){
+
+        const ele = `<div data-index-number="${obj.sn}" class="assessment-wrapper assessment-q-${obj.sn}"><h1> Question ${obj.sn} </h1>` +
+                    `<blockquote class="mt-5"> ${obj.question} </blockquote>` +
+                   ' <div class="container mt-5" style="margin-top: 7rem !important"> ' +
+                      '  <div class="row"> ' +
+                           ' <div class="col"> ' +
+                               ` <button type="button" class="btn btn-primary assessment-btn assessment-sd-option-${obj.sn}"> ${obj.options.a} </button> ` +
+                           ' </div> ' +
+                           ' <div class="col"> ' +
+                              `  <button type="button" class="btn btn-primary assessment-btn assessment-d-option-${obj.sn}"> ${obj.options.b} </button> ` +
+                        '    </div> ' +
+                          '  <div class="col"> ' +
+                             ` <button type="button" class="btn btn-primary assessment-btn assessment-sa-option-${obj.sn}"> ${obj.options.c} </button> ` +
+                          '  </div> ' +
+                           '  <div class="col"> ' +
+                             `   <button type="button" class="btn btn-primary assessment-btn assessment-a-option-${obj.sn}"> ${obj.options.d} </button> ` +
+                          '  </div> ' +
+                    '    </div> ' +
+                  '  </div></div>' 
+
+    return await ele
+
+    }
+}
+
+function nextItem (arr, index, selector) {
+   if(Array.isArray(selector))
+     selector.push(arr[index - 1])
+     return selector
+}
+
+function updateFormQuestion (form_wrapper, content) {
+
+    if( Array.isArray(content) ) {
+
+    const next_question = formContents(content[content.length - 1])
+    next_question.then(res => {
+        if(res !== undefined) form_wrapper.innerHTML = res
+    })
+
+    }
+
+}
+
+const setAssessmentCheckInterval = setInterval(() => {
+    const current_visible_question = document.querySelector('.assessment-wrapper')
+
+    const current_visible_question_data_index = current_visible_question.dataset.indexNumber
+
+    // const previous_index = sessionStorage.getItem('previous_index')
+
+    // console.log('time_time',  new_empty_err.length, Number(current_visible_question_data_index), 'data_ready_to_be_saved', data_ready_to_be_saved)
+
+    if( new_empty_err.length === Number(current_visible_question_data_index) ) {
+
+         const current_visible_question_data_index_ = Number(current_visible_question_data_index) + 1
+
+        // console.log('time_time_time',  new_empty_err.length, current_visible_question_data_index_)
+
+        if( new_empty_err.length < current_visible_question_data_index_ ){
+
+            new_empty_err_length = new_empty_err.length
+
+        // set last question answered to true
+
+         last_question_answered = true
+        
+        
+
+        }
+        
+    }
+
+}, 500)
+
+function checkAssessmentStage (uncompleted_assessment, completed_assessment, assessment_id) {
+
+    const new_arr = []
+
+    if( Array.isArray(uncompleted_assessment) && Array.isArray(completed_assessment)  ) {
+
+        /** 
+         * filter the completed assessment and remove unnecessary items. Ps: this won't be sorted
+         * 
+         */
+
+        const uncompleted_length = uncompleted_assessment.length
+
+        const completed_length = completed_assessment.length
+
+        if(uncompleted_assessment[uncompleted_length - 1].sn === Number(assessment_id)) {
+
+        // the good data start from the end of the array so we will extract from the last item
+
+        const filter_completed_assessment = completed_assessment.slice(completed_length - uncompleted_length)
+
+        data_ready_to_be_saved.push(filter_completed_assessment)
+
+
+        console.log('filtered_uncompleted', filter_completed_assessment, 'typeof', uncompleted_assessment[uncompleted_length - 1].sn, assessment_id, 'uncompleted_length', uncompleted_length)
+
+        }
+
+
+    }
+}
+
+preSubmitAssessment()
+
+function  preSubmitAssessment () {
+
+// e.preventDefault()
+
+    const submit_button = document.querySelector('.pre-submit-assessment-button')
+
+    submit_button.addEventListener('click', (e) => {
+
+        const form = document.querySelector('form')
+
+const submitted_data = {
+    data: data_ready_to_be_saved[data_ready_to_be_saved.length - 1]
+}
+
+const data_filter = submitted_data.data.filter((val, index, arr) => val !== undefined || null)
+
+const data = JSON.stringify(data_filter)
+
+const hiddenfield = document.querySelector('.hidden-field-data')
+
+const guardianemailhiddenfield = document.querySelector('.hidden-field-email')
+
+const patientoutputhiddenfield = document.querySelector('.hidden-field-patientoutput')
+
+hiddenfield.value = data
+patientoutputhiddenfield.value = patientoutput
+guardianemailhiddenfield.value = guardianemail
+
+// console.log('data_filter', data_filter ,'submitted_data', submitted_data, 'sdata', data)
+
+setTimeout(() => submitAssessmentResult(), 5000)
+
+// const formData = new FormData(form)
+
+// for(const [key, val] of formData){
+//     formData.set(key, val)
+// }
+
+// const response = postData("/assessment/submit", formData )
+// const handle_data = response.then((data) => {
+//   console.log('the data', data); // JSON data parsed by `data.json()` call
+// })
+
+        
+    })
+    
+
+    // const assessment_result = sessionStorage.getItem('completed_assessment')
+
+    // console.log('complete_uncompleted_assessment', completed_assessment)
+}
+
+ function submitAssessmentResult () {
+ document.getElementById('submit-assessment-button').click()
+}
+
+
+// Example POST method implementation:
+async function postData(url = "", data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
+    mode: "cors", // no-cors, *cors, same-origin
+    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: "same-origin", // include, *same-origin, omit
+    headers: {
+      "Content-Type": "application/json",
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: "follow", // manual, *follow, error
+    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data), // body data type must match "Content-Type" header
+  });
+  return response; // parses JSON response into native JavaScript objects
+}
+
+function myClearInterval (interval1) {
+    if(interval1) clearInterval(interval1)
+}
+
+setTimeout(() => {
+
+    if(data_ready_to_be_saved.length > 1) {
+
+        const data = data_ready_to_be_saved[data_ready_to_be_saved.length - 1]
+
+        const ls = btoa(JSON.stringify(data))
+
+console.log('data_ready_to_be_saved', data_ready_to_be_saved, data, data_ready_to_be_saved.length)
+
+// sessionStorage.setItem('completed_assessment', ls )
+
+    }else if(data_ready_to_be_saved.length === 1){
+
+        const data = data_ready_to_be_saved[data_ready_to_be_saved.length]
+
+        const ls = btoa(JSON.stringify(data))
+
+console.log('data_ready_to_be_saved', data_ready_to_be_saved, data, data_ready_to_be_saved.length)
+
+// sessionStorage.setItem('completed_assessment', ls)
+
+    }else{
+
+    //    alert("You can only submit this form")
+
+    }
+
+
+}, 30000)
+
+</script>

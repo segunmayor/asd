@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,17 +25,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-386i3tr*61#k6$6(4koa)1-9^2xs6jib34jqw6p+(nlya0e((r'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'http://127.0.0.1:8000',
+    'https://negxyeducation.com',
+    "/var/www/projects/kale/asd/asddiagnoses"
+]
 
+CSRF_TRUSTED_ORIGIN = ['http://127.0.0.1:8000', 'https://negxyeducation.com',]
 
 # Application definition
 
 INSTALLED_APPS = [
+    'clearcache',
     'baton',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,6 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'baton.autodiscover',
     'frontendview',
+    'helper',
+    'fontawesomefree'
 ]
 
 MIDDLEWARE = [
@@ -119,10 +133,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    os.path.join(BASE_DIR, 'static'),
+    "/var/www/projects/kale/asd/asddiagnoses/static"
 ]
 
-STATIC_URL = 'static/'
+STATIC_URL = "/static/"
+
+MEDIA_URL = "/images/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -183,3 +200,11 @@ BATON = {
         ] },
     )
 }
+
+# REST_FRAMEWORK = {
+#     # Use Django's standard `django.contrib.auth` permissions,
+#     # or allow read-only access for unauthenticated users.
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+#     ]
+# }

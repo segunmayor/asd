@@ -60,7 +60,7 @@
     content: "\f1d8";
   }
   .icon-map:before {
-    content: "\f279";
+    content: "\f0d1";
   }
   .icon-phone2:before {
     content: "\e0cd";
@@ -70,4 +70,7 @@
   }
   .icon-person:before {
     content: "\e7fd";
+  }
+  .icon-map::before {
+    content: "\f0d1";
   }

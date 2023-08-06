@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<div class="container assessment-result-container pt-5 pb-5">
+  
+    <div class="container">
+        <div class="row">
+            <div class="col card">
+                <div class="container align-middle p-5">
+                    <div class="row">
+                        <div class="col text-end align-middle">
+                            <div class="text-end d-table align-middle" style="height: 100%;width: 100%;  position: relative; text-align: right; display: table">
+                                <div class="text-end d-table-cell align-middle" style="height: 100%; position: relative; text-align: right; display: table-cell; vertical-align: middle;">
+                                    Hi  {{ res.patientname }},
+                                    <p>Your autism status is</p> 
+                                    <p> <strong> 
+                                        <em style="color: yellowgreen; font-size: 2.5em"> {{ res.result }} </em>
+                                    </strong> </p>
+                                </div>
+                             </div>
+                        </div>
+                        <div class="col text-start align-items-center">
+                            <div class="avatar-reaction"> 
+                               {% if res.result == 'Positive' %}
+                               <img src="{% static 'images/sad.png' %}" width="200px"/> 
+                               {% endif %}
+                               {% if res.result == 'Negative' %}
+                               <img src="{% static 'images/happy.png' %}" width="200px"/> 
+                               {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+{% endblock content %}

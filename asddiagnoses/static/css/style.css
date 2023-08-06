@@ -58,11 +58,6 @@
     color: #212529;
     text-align: left;
     background-color: #fff; }
-
-    div.form.pt-5.pb-5 .container {
-      background: #fff !important;
-      box-shadow: 0 0 15px 3px #eee !important;
-    }
   
   [tabindex="-1"]:focus {
     outline: 0 !important; }
@@ -3308,3 +3303,29 @@
       stroke-dasharray: 89, 200;
       stroke-dashoffset: -136px; } }
 
+div.form.pt-5.pb-5 .form-inner-container {
+ background: #fff !important;
+ box-shadow: 0 0 15px 3px #eee !important;
+ }
+
+ .card {
+  background: #fff !important;
+  box-shadow: 0 0 15px 3px #eee !important;
+  }
+
+ .register-container, .assessment-submit-button  {
+  display: none
+ }
+
+ .register-container .container .row .register, .register-next, .assessment-submit-button {
+text-align: right;
+ }
+
+ button:active {
+  background: #ff8000;
+ }
+
+ .hidden-field {
+  display: none
+ }
+ 
