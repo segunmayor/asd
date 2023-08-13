@@ -33,8 +33,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'http://127.0.0.1:8000',
-    'https://negxyeducation.com',
-    "/var/www/projects/kale/asd/asddiagnoses"
+    'https://negxyeducation.com'
 ]
 
 CSRF_TRUSTED_ORIGIN = ['http://127.0.0.1:8000', 'https://negxyeducation.com',]
