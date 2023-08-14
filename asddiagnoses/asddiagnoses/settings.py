@@ -42,7 +42,7 @@ CSRF_TRUSTED_ORIGIN = ['http://127.0.0.1:8000', 'https://negxyeducation.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'clearcache',
+   # 'clearcache',
     'baton',
     'django.contrib.admin',
     'django.contrib.auth',
