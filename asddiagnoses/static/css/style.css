@@ -3328,4 +3328,29 @@ text-align: right;
  .hidden-field {
   display: none
  }
- 
+ .default-icon-size{
+  font-size: 3em
+ }
+ .text-white{
+  color: #fff
+ }
+ .footer-icon-size {
+  font-size: 3em
+}
+
+/* target small devices max-width of 320px */
+
+@media screen and (max-width: 320px) {
+  .w-sm-100 {
+    width: 100%
+  }
+  .d-sm-block {
+    display: block
+  }
+  .pb-sm-2 {
+    padding-bottom: 2rem
+  }
+  .text-sm-start {
+    text-align: left;
+  }
+}

@@ -17,7 +17,7 @@ class AccessmentQuestion:
         self.dob = dob
         self.category =  {
             "infant": 1,
-            "toddlers": 3,
+            "toddler": 3,
             "preschool": 5,
             "gradeschooler": 12
         }
@@ -117,7 +117,7 @@ class AccessmentQuestion:
             },
              {
                 'sn': 9,
-                'question': 'He&#8260;she can hold his&#8260;her head up when lying down on their tummy and pushing up.',
+                'question': 'He&#8260;she can hold his&#8260;her head up when lying down on their tummy and pushing up',
                 'options': {
                     'a': 'slightly disagree',
                     'b': 'disagree',
