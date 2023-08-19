@@ -1,10 +1,11 @@
 {
     "builds": [
       {
-        "src": "asddiagnoses/asddiagnoses/wsgi.py",
+        "src": "asddiagnoses/wsgi.py",
         "use": "@vercel/python",
         "config": {
-            "maxLambdaSize": "15mb"
+            "maxLambdaSize": "15mb",
+            "runtime": "python3.10"
         }
       },
       {
@@ -22,7 +23,7 @@
     },
       {
         "src": "/(.*)",
-        "dest": "asddiagnoses/asddiagnoses/wsgi.py"
+        "dest": "asddiagnoses/wsgi.py"
       }
     ]
 }
