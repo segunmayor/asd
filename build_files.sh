@@ -1,3 +1,3 @@
 pip3 install -r requirements.txt
-python3 asddiagnoses/manage.py collectstatic
-python3 asddiagnoses/manage.py runserver
+python3 manage.py collectstatic
+python3 manage.py runserver
