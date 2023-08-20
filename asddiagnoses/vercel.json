@@ -23,7 +23,7 @@
     },
       {
         "src": "/(.*)",
-        "dest": "asddiagnoses/wsgi.py"
+        "dest": "/asddiagnoses/wsgi.py"
       }
     ]
 }
