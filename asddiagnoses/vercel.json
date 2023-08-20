@@ -4,8 +4,8 @@
         "src": "asddiagnoses/wsgi.py",
         "use": "@vercel/python",
         "config": {
-            "maxLambdaSize": "30mb",
-            "runtime": "python3"
+            "maxLambdaSize": "60mb",
+            "runtime": "python3.10"
         }
       },
       {
