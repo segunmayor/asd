@@ -1,7 +1,7 @@
 {
     "builds": [
       {
-        "src": "asddiagnoses/wsgi.py",
+        "src": "./asddiagnoses/wsgi.py",
         "use": "@vercel/python",
         "config": {
             "maxLambdaSize": "50mb",
@@ -20,7 +20,7 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "asddiagnoses/wsgi.py"
+        "dest": "./asddiagnoses/wsgi.py"
       },
       {
           "src": "/static/(.*)",
