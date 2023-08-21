@@ -1,0 +1,30 @@
+{
+    "builds": [
+      {
+        "src": "asddiagnoses/wsgi.py",
+        "use": "@vercel/python",
+        "config": {
+            "maxLambdaSize": "50mb",
+            "maxDuration": 60,
+            "runtime": "python3"
+        }
+      },
+      {
+        "src": "build_files.sh",
+        "use": "@vercel/static-build",
+        "config": {
+            "distDir": "static-build"
+        }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "asddiagnoses/wsgi.py"
+      },
+      {
+          "src": "/static/(.*)",
+          "dest": "static/$1"
+      }
+    ]
+}
