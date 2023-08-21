@@ -38,8 +38,8 @@ from django.conf.urls.static import static
 # router.register(r'users', UserViewSet)
 
 urlpatterns = [
-    path('admin/clearcache/', include('clearcache.urls')),
     path('', include('frontendview.urls')),
+    path('admin/clearcache/', include('clearcache.urls')),
     path('admin/', admin.site.urls),
     path('baton/', include('baton.urls')),
     # path('api-auth/', include('rest_framework.urls'))
