@@ -7,7 +7,13 @@ For more information on this file, see
 https://docs.djangoproject.com/en/4.2/howto/deployment/wsgi/
 """
 
-import os
+import os, sys
+
+exec(open("/bin/activate_this.py").read(), {'__file__': "/bin/activate.py"})
+
+sys.path.append('/core/core')
+
+sys.path.append('/lib/python3.10/site-packages')
 
 from django.core.wsgi import get_wsgi_application
 
