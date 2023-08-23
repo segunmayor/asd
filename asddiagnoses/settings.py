@@ -142,7 +142,7 @@ USE_TZ = True
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    "*/iagnoses/static"
+    "*/asddiagnoses/static"
 ]
 
 STATIC_URL = "/static/"
