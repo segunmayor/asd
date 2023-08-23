@@ -6,7 +6,7 @@
       "config": {
           "maxLambdaSize": "50mb",
           "maxDuration": 60,
-          "runtime": "python3.10"
+          "runtime": "python3"
       }
     },
     {
