@@ -142,7 +142,7 @@ USE_TZ = True
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    "/var/www/projects/kale/asd/asddiagnoses/static"
+    "*/iagnoses/static"
 ]
 
 STATIC_URL = "/static/"
@@ -150,7 +150,8 @@ STATIC_URL = "/static/"
 MEDIA_URL = "/images/"
 
 STATIC_ROOT = [
-    os.path.join(BASE_DIR, 'staticfiles_build'), "/var/www/projects/kale/asd/asddiagnoses/static"
+    os.path.join(BASE_DIR, 'staticfiles_build'),
+    "*/asddiagnoses/static"
 ]
 
 # Default primary key field type
