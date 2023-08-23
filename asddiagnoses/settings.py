@@ -150,7 +150,7 @@ STATIC_URL = "/static/"
 MEDIA_URL = "/images/"
 
 STATIC_ROOT = [
-    os.path.join(BASE_DIR, 'staticfiles_build'), "static"
+    os.path.join(BASE_DIR, 'staticfiles_build'), "/var/www/projects/kale/asd/asddiagnoses/static"
 ]
 
 # Default primary key field type
