@@ -4,7 +4,6 @@ bcrypt==3.2.0
 blinker==1.4
 boto3==1.28.25
 botocore==1.31.25
-Brlapi
 certifi==2020.6.20
 chardet==4.0.0
 click==8.0.3
