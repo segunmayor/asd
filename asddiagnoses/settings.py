@@ -126,9 +126,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-STATIC_URL = "/static/"
+STATIC_URL = "static/"
 
-MEDIA_URL = "/images/"
+MEDIA_URL = "images/"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -147,7 +147,7 @@ USE_TZ = True
 
 STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
- 
+
 # [os.path.join(BASE_DIR, 'static'), "/var/www/projects/kale/asd/asddiagnoses/static" ]
 
 # Default primary key field type
