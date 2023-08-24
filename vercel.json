@@ -1,5 +1,4 @@
 {
-  "outputDirectory": "staticfiles_build",
   "builds": [
     {
       "src": "asddiagnoses/wsgi.py",
