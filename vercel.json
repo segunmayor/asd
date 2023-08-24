@@ -1,12 +1,12 @@
 {
+  "version": 2,
   "builds": [
     {
       "src": "asddiagnoses/wsgi.py",
       "use": "@vercel/python",
       "config": {
-          "maxLambdaSize": "50mb",
-          "maxDuration": 60,
-          "runtime": "python3"
+          "maxLambdaSize": "15mb",
+          "runtime": "python3.9"
       }
     },
     {
