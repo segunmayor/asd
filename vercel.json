@@ -6,7 +6,8 @@
       "config": {
           "maxLambdaSize": "50mb",
           "maxDuration": 60,
-          "runtime": "python3"
+          "runtime": "python3",
+          "outputDirectory": "staticfiles_build"
       }
     },
     {
