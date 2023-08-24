@@ -33,8 +33,6 @@ ALLOWED_HOSTS = [
     '.vercel.app',
     '.now.sh',
     '127.0.0.1',
-    '*.vercel.app',
-    '127.0.0.1:8000',
     'negxyeducation.com'
 ]
 
@@ -42,7 +40,6 @@ CSRF_TRUSTED_ORIGIN = [
     '.vercel.app',
     '.now.sh',
     '127.0.0.1',
-    '*.vercel.app',
     'negxyeducation.com'
     ]
 
