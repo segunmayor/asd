@@ -31,17 +31,19 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = [
+    '.vercel.app',
+    '.now.sh',
     '127.0.0.1',
     '*.vercel.app',
-    '.vercel.app',
     '127.0.0.1:8000',
     'negxyeducation.com'
 ]
 
 CSRF_TRUSTED_ORIGIN = [
-    '127.0.0.1:8000',
-    '*.vercel.app',
     '.vercel.app',
+    '.now.sh',
+    '127.0.0.1',
+    '*.vercel.app',
     'negxyeducation.com'
     ]
 
@@ -124,6 +126,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+STATIC_URL = "/static/"
+
+MEDIA_URL = "/images/"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -140,16 +145,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-    "/var/www/projects/kale/asd/asddiagnoses/static"
-]
-
-STATIC_URL = "/static/"
-
-MEDIA_URL = "/images/"
-
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+ 
+# [os.path.join(BASE_DIR, 'static'), "/var/www/projects/kale/asd/asddiagnoses/static" ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
