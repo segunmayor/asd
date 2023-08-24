@@ -145,9 +145,6 @@ STATIC_URL = "static/"
 
 MEDIA_URL = "images/"
 
-STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
-
 # [os.path.join(BASE_DIR, 'static'), "/var/www/projects/kale/asd/asddiagnoses/static" ]
 
 # Default primary key field type
@@ -217,3 +214,6 @@ BATON = {
 #         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
 #     ]
 # }
+
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
