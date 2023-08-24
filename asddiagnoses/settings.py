@@ -142,17 +142,14 @@ USE_TZ = True
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    "*/asddiagnoses/static"
+    "/var/www/projects/kale/asd/asddiagnoses/static"
 ]
 
 STATIC_URL = "/static/"
 
 MEDIA_URL = "/images/"
 
-STATIC_ROOT = [
-    os.path.join(BASE_DIR, 'staticfiles_build'),
-    "*/asddiagnoses/static"
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
